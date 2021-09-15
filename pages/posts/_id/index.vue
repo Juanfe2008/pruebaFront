@@ -2,6 +2,7 @@
   <div class="card">
     <h2>{{post.name}}</h2>
     <p>Id: {{post.id}}</p>
+    <br><br>
     <p>Email: {{post.email}}</p>
     <br><br>
     <p>{{post.body}}</p>
@@ -33,6 +34,8 @@ export default {
 <style>
 .card {
   border: 1px solid whitesmoke;
-  padding: 4rem;
+  padding: rem;
+  background: #2d3436;
+
 }
 </style>

@@ -16,7 +16,7 @@ export default {
 <style>
 .post {
   padding: 1rem;
-  border: 1px solid whitesmoke;
+  border: 1px solid whitesmoke !important;
   margin: 1rem 0;
 }
 

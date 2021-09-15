@@ -34,8 +34,8 @@ export default {
 }
 
 body {
-  background: #2d3436;
-  color: whitesmoke;
+  background: #2d3436 !important;
+  color: #fff !important;
   font-family: Arial, Helvetica, sans-serif;
 }
 
