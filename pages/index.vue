@@ -1,42 +1,104 @@
 <template>
   <div class="" id="app">
     <form v-on:submit.prevent="procesar()">
-      <h1>Welcome to My first Nuxt App</h1>
+      <h1>Basic user CRUD</h1>
       <br />
       <div class="form-group row col-sm-10">
         <label class="col-sm-1"> Name </label>
-        <input class="col-sm-5 form-control" placeholder="Name" v-model="name"/>
-
+        <input
+          class="col-sm-5 form-control"
+          placeholder="Name"
+          v-model="name"
+        />
       </div>
       <div class="row form-group messaje">
-      <div v-if="submited && !$v.name.required">
+        <div v-if="submited && !$v.name.required">
           *The name field is required
         </div>
         <div v-if="submited && !$v.name.minLength">
-          *Must have a minimum of 5 characters
+          *Must have a minimum of 1 characters
         </div>
         <div v-if="submited && !$v.name.maxLength">
-          *Must have a maximum of 10 characters
+          *Must have a maximum of 50 characters
         </div>
       </div>
 
       <div class="form-group row col-sm-10">
         <label class="col-sm-1"> Last Name </label>
-        <input class="form-control col-sm-5" placeholder="Last Name" v-model="lastName"/>
+        <input
+          class="form-control col-sm-5"
+          placeholder="Last Name"
+          v-model="lastName"
+        />
       </div>
       <div class="row form-group messaje">
         <div v-if="submited && !$v.lastName.required">
           *The last name field is required
         </div>
         <div v-if="submited && !$v.lastName.minLength">
-          *Must have a minimum of 5 characters
+          *Must have a minimum of 1 characters
         </div>
         <div v-if="submited && !$v.lastName.maxLength">
+          *Must have a maximum of 50 characters
+        </div>
+      </div>
+
+      <div class="form-group row col-sm-10">
+        <label class="col-sm-1">Telephone</label>
+        <input
+          type="number"
+          class="form-control col-sm-5"
+          placeholder="Telephone"
+          v-model="telephone"
+        />
+      </div>
+      <div class="row form-group messaje">
+        <div v-if="submited && !$v.telephone.required">
+          *The last telephone field is required
+        </div>
+        <div v-if="submited && !$v.telephone.minLength">
+          *Must have a minimum of 10 characters
+        </div>
+        <div v-if="submited && !$v.telephone.maxLength">
           *Must have a maximum of 10 characters
         </div>
+      </div>
 
+      <div class="form-group row col-sm-10">
+        <label class="col-sm-1">Address</label>
+        <input
+          class="form-control col-sm-5"
+          placeholder="Address"
+          v-model="address"
+        />
+      </div>
+      <div class="row form-group messaje">
+        <div v-if="submited && !$v.address.required">
+          *The last address field is required
+        </div>
+        <div v-if="submited && !$v.address.minLength">
+          *Must have a minimum of 5 characters
+        </div>
+        <div v-if="submited && !$v.address.maxLength">
+          *Must have a maximum of 20 characters
+        </div>
+      </div>
 
-
+      <div class="form-group row col-sm-10">
+        <label class="col-sm-1">E-Mail</label>
+        <input
+          class="form-control col-sm-5"
+          placeholder="E-Mail"
+          v-model="email"
+        />
+      </div>
+      <div class="row form-group messaje">
+        <div v-if="submited && !$v.email.required">
+          *The last email field is required
+        </div>
+        <div v-if="submited && !$v.email.email">
+          *You must write a valid email
+        </div>
       </div>
       <button type="submit" class="btn btn-success btn-sm" @click="add">
         Agregar
@@ -52,7 +114,12 @@
 </template>
 
 <script>
-import { required, minLength, maxLength } from "vuelidate/lib/validators";
+import {
+  required,
+  minLength,
+  maxLength,
+  email,
+} from "vuelidate/lib/validators";
 export default {
   head() {
     return {
@@ -74,9 +141,9 @@ export default {
       submited: false,
       name: "",
       lastName: "",
-      telephone: '',
-      address: '',
-      email: '',
+      telephone: "",
+      address: "",
+      email: "",
       user: [],
     };
   },
@@ -91,10 +158,17 @@ export default {
         this.user.push({
           name: this.name,
           lastName: this.lastName,
+          telephone: this.telephone,
+          address: this.address,
+          email: this.email,
         }),
           console.log(this.user);
-          this.submited = false;
-        (this.name = ""), (this.lastName = "");
+        this.submited = false;
+        (this.name = ""),
+          (this.lastName = ""),
+          (this.telephone = ""),
+          (this.address = ""),
+          (this.email = "");
       } catch (error) {
         console.log(error);
       }
@@ -103,20 +177,34 @@ export default {
   validations: {
     name: {
       required,
-      minLength: minLength(5),
-      maxLength: maxLength(10),
+      minLength: minLength(1),
+      maxLength: maxLength(50),
     },
     lastName: {
       required,
-      minLength: minLength(5),
+      minLength: minLength(1),
+      maxLength: maxLength(50),
+    },
+    telephone: {
+      required,
+      minLength: minLength(10),
       maxLength: maxLength(10),
+    },
+    address: {
+      required,
+      minLength: minLength(5),
+      maxLength: maxLength(20),
+    },
+    email: {
+      required,
+      email,
     },
   },
 };
 </script>
 <style>
-  .messaje{
-    padding-left: 6rem !important;
-    color: dimgray;
-  }
+.messaje {
+  padding-left: 6rem !important;
+  color: dimgray;
+}
 </style>
