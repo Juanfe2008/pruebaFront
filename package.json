@@ -16,5 +16,7 @@
     "nuxt": "^2.0.0",
     "vuelidate": "^0.7.6"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@types/vuelidate": "^0.7.15"
+  }
 }

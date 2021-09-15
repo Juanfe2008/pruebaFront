@@ -10,6 +10,7 @@
           placeholder="Name"
           v-model="name"
         />
+        <div v-if="submited && !$v.name.required">el campo name es obligatorio</div>
       </div>
       <div class="form-group row col-sm-10">
         <label class="col-sm-1"> Last Name </label>
@@ -21,19 +22,19 @@
       </div>
       <button type="submit" class="btn btn-success btn-sm" @click="add">Agregar</button>
 
-      <!-- <div v-for="(item) of user" :key="item.name">
+      <div v-for="(item) of user" :key="item.name">
       <div class="alert alert-primary mt-4" role="alert">
         <div>
           {{item.name}} {{item.lastName}}
         </div>
       </div>
-    </div> -->
+    </div>
     </form>
   </div>
 </template>
 
 <script>
-import { required, minLength, maxLength } from "Vuelidate/lib/validators";
+import { required, minLength, maxLength } from "vuelidate/lib/validators";
 export default {
   head() {
     return {
@@ -52,6 +53,7 @@ export default {
   },
   data() {
     return {
+      submited: false,
       name: "",
       lastName: "",
       user: [],
@@ -71,6 +73,7 @@ export default {
       }
     },
     procesar() {
+      this.submited = true
       if (this.$v.$invalid) {
         return false;
       }
