@@ -170,7 +170,7 @@ export default {
           address: this.address,
           email: this.email,
         }),
-          //console.log(this.user);
+
           (this.submited = false);
         (this.name = ""),
           (this.lastName = ""),
