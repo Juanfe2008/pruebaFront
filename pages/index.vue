@@ -60,7 +60,7 @@
           *Must have a minimum of 10 characters
         </div>
         <div v-if="submited && !$v.telephone.maxLength">
-          *Must have a maximum of 10 characters
+          *Must have a maximum of 10 charactersss prueba
         </div>
       </div>
 
