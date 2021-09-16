@@ -100,15 +100,32 @@
           *You must write a valid email
         </div>
       </div>
-      <button type="submit" class="btn btn-success btn-sm" @click="add">
+      <button type="submit" class="btn btn-success btn-sm" @click="save">
         Agregar
       </button>
-
-      <div v-for="item of user" :key="item.name">
-        <div class="alert alert-primary mt-4" role="alert">
-          <div>{{ item.name }} {{ item.lastName }}</div>
-        </div>
-      </div>
+      <hr style="background: white" />
+      <table class="table table-success table-dark table-hover" style="background-color: #262a2d !important; border-radius: 1.25rem">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Dirección</th>
+            <th scope="col">E-Mail</th>
+          </tr>
+        </thead>
+        <tbody v-for="item of personas" :key="item.idCliente">
+          <tr >
+            <td>{{ item.idCliente }}</td>
+            <td>{{ item.nombres }}</td>
+            <td>{{ item.apellidos }}</td>
+            <td>{{ item.telefono }}</td>
+            <td>{{ item.direccion }}</td>
+            <td>{{ item.email }}</td>
+          </tr>
+        </tbody>
+      </table>
     </form>
   </div>
 </template>
@@ -147,18 +164,19 @@ export default {
       address: "",
       email: "",
       user: [],
+      personas: null,
+      persona: {
+        nombres: null,
+        apellidos: null,
+        telefono: null,
+        direccion: null,
+        email: null,
+      },
     };
   },
   methods: {
-    add: function (user) {
-      console.log("hola", user);
-      try {
-      } catch (error) {
-        console.log(error);
-      }
-    },
     procesar() {
-      this.submited = true;
+      /* this.submited = true;
       if (this.$v.$invalid) {
         return false;
       }
@@ -170,38 +188,56 @@ export default {
           address: this.address,
           email: this.email,
         }),
-
           (this.submited = false);
         (this.name = ""),
           (this.lastName = ""),
           (this.telephone = ""),
           (this.address = ""),
           (this.email = "");
-        let parametros =
-          "nombres=" +
-          this.user.name +
-          "&apellidos=" +
-          this.user.lastName +
-          "&telefono=" +
-          this.user.telephone +
-          "&direccion=" +
-          this.user.address +
-          "&email=" +
-          this.user.email;
         console.log(this.user);
-        axios.
-        post("localhost:8080/clientes", this.user)
-        .then( (res) => {
-          if(res.status==200){
-            console.log(res);
-          }
-        }).catch( /* (error) => {
+        await axios
+          .post("localhost:8080/clientes", this.user)
+          .then((res) => {
+            if (res.status == 200) {
+              console.log(res);
+            }
+          })
+          .catch( (error) => {
           console.log(error);
-        } */);
+        } );
       } catch (error) {
         console.log(error);
-      }
+      } */
     },
+    save() {
+      this.submited = true;
+      if (this.$v.$invalid) {
+        return false;
+      }
+      const persona = {
+        nombres: this.name,
+        apellidos: this.lastName,
+        telefono: this.telephone,
+        direccion: this.address,
+        email: this.email,
+      };
+      console.log(persona);
+      this.crudService.save(persona).then((data) => {
+        if (data.status === 200) {
+          this.getAll();
+          this.submited = false;
+          (this.name = ""),
+          (this.lastName = ""),
+          (this.telephone = ""),
+          (this.address = ""),
+          (this.email = "");
+        }
+        console.log(data);
+      });
+    },
+    select(event){
+      console.log(event);
+    }
   },
   validations: {
     name: {
@@ -216,7 +252,7 @@ export default {
     },
     telephone: {
       required,
-      minLength: minLength(10),
+      minLength: minLength(9),
       maxLength: maxLength(10),
     },
     address: {
@@ -229,14 +265,15 @@ export default {
       email,
     },
   },
-  created(){
-    this.creudService = new CrudService();
+  created() {
+    this.crudService = new CrudService();
   },
-  mounted(){
-    this.creudService.getAll().then( data => {
-      console.log(data);
-    })
-  }
+  mounted() {
+    this.crudService.getAll().then((data) => {
+      this.personas = data.data;
+      console.log(this.personas);
+    });
+  },
 };
 </script>
 <style>

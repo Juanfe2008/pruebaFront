@@ -3,7 +3,11 @@ import axios from 'axios';
 export default class CrudService {
   url = "http://localhost:8080/clientes";
 
-  async getAll(){
+   async getAll(){
      return await axios.get(this.url)
+  }
+
+  save(persona) {
+    return  axios.post(this.url, persona)
   }
 }
