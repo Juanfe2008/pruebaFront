@@ -101,10 +101,16 @@
         </div>
       </div>
       <button type="submit" class="btn btn-success btn-sm" @click="save">
-        Agregar
+        Add
+      </button>
+      <button type="submit" class="btn btn-warning btn-sm" @click="edit">
+        Edit
       </button>
       <hr style="background: white" />
-      <table class="table table-success table-dark table-hover" style="background-color: #262a2d !important; border-radius: 1.25rem">
+      <table
+        class="table table-success table-dark table-hover"
+        style="background-color: #262a2d !important; border-radius: 1.25rem"
+      >
         <thead>
           <tr>
             <th scope="col">Id</th>
@@ -113,16 +119,18 @@
             <th scope="col">Telefono</th>
             <th scope="col">Dirección</th>
             <th scope="col">E-Mail</th>
+            <th scope="col">Delet</th>
           </tr>
         </thead>
-        <tbody v-for="item of personas" :key="item.idCliente">
-          <tr >
-            <td>{{ item.idCliente }}</td>
-            <td>{{ item.nombres }}</td>
-            <td>{{ item.apellidos }}</td>
-            <td>{{ item.telefono }}</td>
-            <td>{{ item.direccion }}</td>
-            <td>{{ item.email }}</td>
+        <tbody v-for="(item, index) of personas" :key="item.idCliente">
+          <tr>
+            <td @click="select(index)">{{ item.idCliente }}</td>
+            <td @click="select(index)">{{ item.nombres }}</td>
+            <td @click="select(index)">{{ item.apellidos }}</td>
+            <td @click="select(index)">{{ item.telefono }}</td>
+            <td @click="select(index)">{{ item.direccion }}</td>
+            <td @click="select(index)">{{ item.email }}</td>
+            <td @click="delet(index)"><button class="btn btn-danger btn-sm">X</button></td>
           </tr>
         </tbody>
       </table>
@@ -163,9 +171,11 @@ export default {
       telephone: "",
       address: "",
       email: "",
+      id: "",
       user: [],
       personas: null,
       persona: {
+        idCliente: null,
         nombres: null,
         apellidos: null,
         telefono: null,
@@ -175,40 +185,7 @@ export default {
     };
   },
   methods: {
-    procesar() {
-      /* this.submited = true;
-      if (this.$v.$invalid) {
-        return false;
-      }
-      try {
-        this.user.push({
-          name: this.name,
-          lastName: this.lastName,
-          telephone: this.telephone,
-          address: this.address,
-          email: this.email,
-        }),
-          (this.submited = false);
-        (this.name = ""),
-          (this.lastName = ""),
-          (this.telephone = ""),
-          (this.address = ""),
-          (this.email = "");
-        console.log(this.user);
-        await axios
-          .post("localhost:8080/clientes", this.user)
-          .then((res) => {
-            if (res.status == 200) {
-              console.log(res);
-            }
-          })
-          .catch( (error) => {
-          console.log(error);
-        } );
-      } catch (error) {
-        console.log(error);
-      } */
-    },
+    procesar() {},
     save() {
       this.submited = true;
       if (this.$v.$invalid) {
@@ -227,16 +204,44 @@ export default {
           this.getAll();
           this.submited = false;
           (this.name = ""),
-          (this.lastName = ""),
-          (this.telephone = ""),
-          (this.address = ""),
-          (this.email = "");
+            (this.lastName = ""),
+            (this.telephone = ""),
+            (this.address = ""),
+            (this.email = "");
         }
         console.log(data);
       });
     },
-    select(event){
+    select(event) {
       console.log(event);
+      console.log(this.personas[event]);
+      (this.name = this.personas[event].nombres),
+        (this.lastName = this.personas[event].apellidos),
+        (this.telephone = this.personas[event].telefono),
+        (this.address = this.personas[event].direccion),
+        (this.email = this.personas[event].email);
+      this.id = this.personas[event].idCliente;
+    },
+    edit() {
+      const persona = {
+        idCliente: this.id,
+        nombres: this.name,
+        apellidos: this.lastName,
+        telefono: this.telephone,
+        direccion: this.address,
+        email: this.email,
+      };
+      console.log(persona);
+      this.crudService.save(persona).then( (data) => {
+        console.log(data);
+      })
+    },
+    delet(index){
+      this.crudService.delet(this.personas[index].idCliente).then( (data) => {
+        if(data.status === 200){
+          alert("Usuario Eliminado")
+        }
+      })
     }
   },
   validations: {

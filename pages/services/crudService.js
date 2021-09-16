@@ -10,4 +10,8 @@ export default class CrudService {
   save(persona) {
     return  axios.post(this.url, persona)
   }
+
+  delet(id){
+    return axios.delete(this.url+"/"+id)
+  }
 }
