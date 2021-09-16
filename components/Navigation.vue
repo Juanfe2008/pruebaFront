@@ -4,13 +4,13 @@
     <nav>
       <ul>
         <li>
-          <nuxt-link to="/">Home</nuxt-link>
+          <nuxt-link to="/home">Home</nuxt-link>
         </li>
         <li>
           <nuxt-link to="/posts">Posts</nuxt-link>
         </li>
         <li>
-          <nuxt-link to="/login">Login</nuxt-link>
+          <nuxt-link to="/">Login</nuxt-link>
         </li>
       </ul>
     </nav>
