@@ -16,7 +16,7 @@
     </form>
 
     <!-- Remind Passowrd -->
-    <div class="alert alert-danger" role="alert" v-if="error">
+    <div class="alert alert-danger" role="alert" v-if="error" >
       {{error_msg}}
     </div>
 
@@ -27,6 +27,21 @@
 <script>
 import axios from 'axios'
 export default {
+  head() {
+    return {
+      title: "Login",
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content: "Website abut tutorials",
+        },
+      ],
+      htmlAttrs: {
+        lang: "en",
+      },
+    };
+  },
   name: 'Login',
   layout: 'auth',
   components:{
