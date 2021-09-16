@@ -121,7 +121,7 @@ import {
   email,
 } from "vuelidate/lib/validators";
 import axios from "axios";
-
+import CrudService from "../pages/services/crudService";
 export default {
   head() {
     return {
@@ -170,7 +170,7 @@ export default {
           address: this.address,
           email: this.email,
         }),
-          //console.log(this.user);
+
           (this.submited = false);
         (this.name = ""),
           (this.lastName = ""),
@@ -229,6 +229,14 @@ export default {
       email,
     },
   },
+  created(){
+    this.creudService = new CrudService();
+  },
+  mounted(){
+    this.creudService.getAll().then( data => {
+      console.log(data);
+    })
+  }
 };
 </script>
 <style>
