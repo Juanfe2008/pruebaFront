@@ -1,6 +1,6 @@
 <template>
   <div class="" id="app">
-    <form v-on:submit.prevent="procesar()">
+    <form v-on:submit.prevent="procesar()" name="form" id="form">
       <h1>Basic user CRUD</h1>
       <br />
       <div class="form-group row col-sm-10">
@@ -120,6 +120,8 @@ import {
   maxLength,
   email,
 } from "vuelidate/lib/validators";
+import axios from "axios";
+
 export default {
   head() {
     return {
@@ -148,7 +150,13 @@ export default {
     };
   },
   methods: {
-    add: function () {},
+    add: function (user) {
+      console.log("hola", user);
+      try {
+      } catch (error) {
+        console.log(error);
+      }
+    },
     procesar() {
       this.submited = true;
       if (this.$v.$invalid) {
@@ -162,13 +170,34 @@ export default {
           address: this.address,
           email: this.email,
         }),
-          console.log(this.user);
-        this.submited = false;
+          //console.log(this.user);
+          (this.submited = false);
         (this.name = ""),
           (this.lastName = ""),
           (this.telephone = ""),
           (this.address = ""),
           (this.email = "");
+        let parametros =
+          "nombres=" +
+          this.user.name +
+          "&apellidos=" +
+          this.user.lastName +
+          "&telefono=" +
+          this.user.telephone +
+          "&direccion=" +
+          this.user.address +
+          "&email=" +
+          this.user.email;
+        console.log(this.user);
+        axios.
+        post("localhost:8080/clientes", this.user)
+        .then( (res) => {
+          if(res.status==200){
+            console.log(res);
+          }
+        }).catch( /* (error) => {
+          console.log(error);
+        } */);
       } catch (error) {
         console.log(error);
       }
@@ -206,5 +235,18 @@ export default {
 .messaje {
   padding-left: 6rem !important;
   color: dimgray;
+}
+
+.input-validate {
+  border: 1px solid darkred;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s cubic-bezier(0.42, 0, 0.76, 1.1),
+    box-shadow 0.15s ease-in-out;
+}
+.input-validate:hover {
+  border: 1px solid darkred;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s cubic-bezier(0.42, 0, 0.76, 1.1),
+    box-shadow 0.15s ease-in-out;
 }
 </style>
