@@ -1,6 +1,6 @@
 <template>
   <div>
-  <Register />
+  <simpleOptions />
   <div class="content">
     <nuxt />
   </div>
@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import Register from '../components/Register.vue';
+import simpleOptions from "../components/simpleOptions.vue"
 
 export default {
   head1() {
@@ -22,7 +22,7 @@ export default {
     };
   },
   components: {
-    Register
+    simpleOptions
   }
 };
 </script>

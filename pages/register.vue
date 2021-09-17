@@ -126,6 +126,7 @@ import {
 import axios from "axios";
 import CrudService from "../pages/services/crudService";
 export default {
+  layout: 'anonymous',
   head() {
     return {
       title: "Register",
@@ -221,6 +222,7 @@ export default {
     this.crudService = new CrudService();
   },
 };
+
 </script>
 
 <style>

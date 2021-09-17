@@ -1,7 +1,6 @@
 <template>
   <div>
-  <Navigation v-if="bandera != true"/>
-  <Register v-if="bandera == true"/>
+  <Navigation />
   <div class="content">
     <nuxt />
   </div>
@@ -10,7 +9,7 @@
 
 <script>
 import Navigation from "../components/Navigation";
-import Register from '../components/Register.vue';
+
 
 export default {
   head() {
@@ -25,20 +24,6 @@ export default {
   },
   components: {
     Navigation,
-    Register
-  },
-  data(){
-    return {
-      bandera: false
-    }
-  },
-  created(){
-    if(this.$router == 'register'){
-      bandera = true
-      console.log(bandera);
-    } else {
-      console.log("no entro condicion");
-    }
   }
 };
 </script>
