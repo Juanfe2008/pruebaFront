@@ -10,7 +10,10 @@
           <nuxt-link to="/posts">Posts</nuxt-link>
         </li>
         <li>
-          <nuxt-link to="/">Login</nuxt-link>
+          <nuxt-link to="/prices">Prices</nuxt-link>
+        </li>
+        <li>
+          <nuxt-link to="/">Logout</nuxt-link>
         </li>
       </ul>
     </nav>
