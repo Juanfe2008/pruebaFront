@@ -1,7 +1,6 @@
 <template>
   <div>
   <Navigation />
-  <Register />
   <div class="content">
     <nuxt />
   </div>
@@ -10,7 +9,7 @@
 
 <script>
 import Navigation from "../components/Navigation";
-import Register from '../components/Register.vue';
+
 
 export default {
   head() {
@@ -25,7 +24,6 @@ export default {
   },
   components: {
     Navigation,
-    Register
   }
 };
 </script>
