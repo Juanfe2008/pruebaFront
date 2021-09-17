@@ -179,7 +179,6 @@ export default {
       console.log(persona);
       this.crudService.save(persona).then((data) => {
         if (data.status === 201) {
-
           this.submited = false;
           (this.name = ""),
             (this.lastName = ""),
