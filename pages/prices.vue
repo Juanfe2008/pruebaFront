@@ -102,7 +102,7 @@ head() {
 
 <style scoped>
 body{margin-top:20px;}
- .pricing-content{}
+
 .single-pricing{
 background:#fff;
 padding:40px 20px;
@@ -153,7 +153,6 @@ transform: translate(0, -10px);
 	font-size: 50px;
 	margin-bottom: 0px;
 }
-.single-pricing{}
 .single-pricing h5 {
 	font-size: 14px;
 	margin-bottom: 0px;

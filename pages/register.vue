@@ -1,7 +1,7 @@
 <template>
   <div class="" id="app">
     <form v-on:submit.prevent="procesar()" name="form" id="form">
-      <h1>User Registration</h1>
+      <h1>Create account</h1>
       <br />
 
       <div class="form-group row col-sm-12">
@@ -178,47 +178,17 @@ export default {
       };
       console.log(persona);
       this.crudService.save(persona).then((data) => {
-        if (data.status === 200) {
-          this.getAll();
+        if (data.status === 201) {
+
           this.submited = false;
           (this.name = ""),
             (this.lastName = ""),
             (this.telephone = ""),
             (this.address = ""),
             (this.email = "");
+          this.$router.push("/home");
         }
         console.log(data);
-      });
-    },
-    select(event) {
-      console.log(event);
-      console.log(this.personas[event]);
-      (this.name = this.personas[event].nombres),
-        (this.lastName = this.personas[event].apellidos),
-        (this.telephone = this.personas[event].telefono),
-        (this.address = this.personas[event].direccion),
-        (this.email = this.personas[event].email);
-      this.id = this.personas[event].idCliente;
-    },
-    edit() {
-      const persona = {
-        idCliente: this.id,
-        nombres: this.name,
-        apellidos: this.lastName,
-        telefono: this.telephone,
-        direccion: this.address,
-        email: this.email,
-      };
-      console.log(persona);
-      this.crudService.save(persona).then((data) => {
-        console.log(data);
-      });
-    },
-    delet(index) {
-      this.crudService.delet(this.personas[index].idCliente).then((data) => {
-        if (data.status === 200) {
-          alert("Usuario Eliminado");
-        }
       });
     },
   },
@@ -250,12 +220,6 @@ export default {
   },
   created() {
     this.crudService = new CrudService();
-  },
-  mounted() {
-    this.crudService.getAll().then((data) => {
-      this.personas = data.data;
-      console.log(this.personas);
-    });
   },
 };
 </script>
