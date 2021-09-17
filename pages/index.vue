@@ -15,9 +15,14 @@
       <input type="submit" class="fadeIn fourth" value="Log In">
     </form>
 
-    <!-- Remind Passowrd -->
+     <!-- Alert Password -->
     <div class="alert alert-danger" role="alert" v-if="error" >
       {{error_msg}}
+    </div>
+
+    <!-- Create Account -->
+    <div id=formFooter>
+      <a class="underlineHover" href="/register">Create Account</a>
     </div>
 
   </div>

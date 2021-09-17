@@ -1,5 +1,5 @@
 <template>
-  <div class="" id="app">
+  <div class="content" id="app">
     <form v-on:submit.prevent="procesar()" name="form" id="form">
       <h1>User Registration</h1>
       <br />
@@ -128,7 +128,7 @@ import CrudService from "../pages/services/crudService";
 export default {
   head() {
     return {
-      title: "Posts App | Register",
+      title: "Register",
       meta: [
         {
           hid: "description",
@@ -278,4 +278,5 @@ export default {
   transition: border-color 0.15s cubic-bezier(0.42, 0, 0.76, 1.1),
     box-shadow 0.15s ease-in-out;
 }
+
 </style>
