@@ -1,7 +1,7 @@
 <template>
   <div class="content" id="app">
     <form v-on:submit.prevent="procesar()" name="form" id="form">
-      <h1>Create account</h1>
+      <h1 style="text-align: center;">Create account</h1>
       <br />
 
       <div class="form-group row col-sm-12">
@@ -62,7 +62,7 @@
       <div class="col-sm-12 row">
         <div class="form-group messaje col-sm-6">
           <div v-if="submited && !$v.telephone.required">
-            *The last telephone field is required
+            *The telephone field is required
           </div>
           <div v-if="submited && !$v.telephone.minLength">
             *Must have a minimum of 10 characters
@@ -73,7 +73,7 @@
         </div>
         <div class="form-group messaje col-sm-6">
           <div v-if="submited && !$v.address.required">
-            *The last address field is required
+            *The address field is required
           </div>
           <div v-if="submited && !$v.address.minLength">
             *Must have a minimum of 5 characters
@@ -84,7 +84,6 @@
         </div>
       </div>
 
-
       <div class="form-group row col-sm-12">
         <label class="col-sm-1">E-Mail</label>
         <input
@@ -93,24 +92,39 @@
           v-model="email"
         />
         <label class="col-sm-1">Password</label>
-        <input type="password"
+        <input
+          type="password"
           class="form-control col-sm-5"
           placeholder="Password"
-          v-model="email"
+          v-model="passwordUser"
         />
       </div>
-      <div class="row form-group messaje">
-        <div v-if="submited && !$v.email.required">
-          *The last email field is required
+      <div class="col-sm-12 row">
+        <div class="col-sm-6 form-group messaje">
+          <div v-if="submited && !$v.email.required">
+            *The email field is required
+          </div>
+          <div v-if="submited && !$v.email.email">
+            *You must write a valid email
+          </div>
         </div>
-        <div v-if="submited && !$v.email.email">
-          *You must write a valid email
+        <div class="col-sm-6 form-group messaje">
+          <div v-if="submited && !$v.passwordUser.required">
+            *The password field is required
+          </div>
+          <div v-if="submited && !$v.passwordUser.minLength">
+            *Must have a minimum of 8 characters
+          </div>
+          <div v-if="submited && !$v.passwordUser.maxLength">
+            *Must have a maximum of 20 characters
+          </div>
         </div>
       </div>
-      <div class="col-sm-12">
-        <button type="submit" class="btn btn-success" @click="save">
-        Register
-      </button>
+
+      <div class="col-sm-12" style="text-align: center;">
+        <button type="submit" class="btn btn-post" @click="save">
+          Register
+        </button>
       </div>
     </form>
   </div>
@@ -126,7 +140,7 @@ import {
 import axios from "axios";
 import CrudService from "../pages/services/crudService";
 export default {
-  layout: 'anonymous',
+  layout: "anonymous",
   head() {
     return {
       title: "Register",
@@ -151,6 +165,7 @@ export default {
       address: "",
       email: "",
       id: "",
+      passwordUser: "",
       user: [],
       personas: null,
       persona: {
@@ -160,6 +175,7 @@ export default {
         telefono: null,
         direccion: null,
         email: null,
+        password: null,
       },
     };
   },
@@ -176,6 +192,7 @@ export default {
         telefono: this.telephone,
         direccion: this.address,
         email: this.email,
+        password: this.passwordUser,
       };
       console.log(persona);
       this.crudService.save(persona).then((data) => {
@@ -186,6 +203,7 @@ export default {
             (this.telephone = ""),
             (this.address = ""),
             (this.email = "");
+          this.passwordUser = "";
           this.$router.push("/home");
         }
         console.log(data);
@@ -205,7 +223,7 @@ export default {
     },
     telephone: {
       required,
-      minLength: minLength(9),
+      minLength: minLength(10),
       maxLength: maxLength(10),
     },
     address: {
@@ -217,15 +235,19 @@ export default {
       required,
       email,
     },
+    passwordUser: {
+      required,
+      minLength: minLength(8),
+      maxLength: maxLength(20),
+    },
   },
   created() {
     this.crudService = new CrudService();
   },
 };
-
 </script>
 
-<style>
+<style scoped>
 .messaje {
   padding-left: 6.5rem !important;
   color: dimgray;
@@ -244,4 +266,36 @@ export default {
     box-shadow 0.15s ease-in-out;
 }
 
+.content {
+  border: 3px solid #312f2f;
+  border-radius: 30px;
+  box-shadow: -7px 9px 12px 7px #212529;
+  background: #141a25;
+}
+
+.btn-post {
+  font-size: 20px !important;
+  background: #30323d !important;
+  border-color: #252527 !important;
+  border: 2px solid;
+  color: white;
+}
+
+.btn-post:hover {
+  font-size: 20px !important;
+  background: #30323d !important;
+  border-color: #25283d !important;
+  color: white;
+  box-shadow: 0px 0px 12px 0.5px #25283d;
+}
+
+.btn-post:focus{
+  box-shadow: 0px 0px 0px 3px #25283d;
+}
+
+.btn-success {
+  font-size: 20px !important;
+  background: #30323d !important;
+  border-color: #303235 !important;
+}
 </style>
