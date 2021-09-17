@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: 'Register'
+  name: 'simpleOptions',
 }
 </script>
 
