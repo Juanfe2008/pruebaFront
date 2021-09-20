@@ -26,7 +26,7 @@
 						<li>5GB Disk Space</li>
 						<li>10 Email Accounts</li>
 					</ul>
-					<a href="#">Get start</a>
+					<a href="/plans/starterPlan">Get start</a>
 				</div>
 			</div><!--- END COL -->
 			<div class="col-lg-4 col-sm-4 col-xs-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.2s" data-wow-offset="0">
@@ -48,7 +48,7 @@
 						<li>25 Email Accounts</li>
 
 					</ul>
-					<a href="#">Get start</a>
+					<a href="/plans/popularPlan">Get start</a>
 				</div>
 			</div><!--- END COL -->
 			<div class="col-lg-4 col-sm-4 col-xs-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s" data-wow-offset="0">
@@ -72,7 +72,7 @@
 						<li>50 Email Accounts</li>
 
 					</ul>
-					<a href="#">Get start</a>
+					<a href="/plans/advancePlan">Get start</a>
 				</div>
 			</div><!--- END COL -->
 		</div><!--- END ROW -->
