@@ -84,9 +84,9 @@
             </div>
             <div class="body widget">
               <ul class="list-unstyled categories-clouds m-b-0">
-                <li><a href="">Science</a></li>
-                <li><a href="">Technologies</a></li>
-                <li><a href="">Nature</a></li>
+                <li><a href="/posts">Science</a></li>
+                <li><a href="/posts">Technologies</a></li>
+                <li><a href="/posts">Nature</a></li>
               </ul>
             </div>
           </div>
@@ -110,6 +110,21 @@
               </div>
             </div>
           </div>
+
+          <div class="card">
+            <div class="header">
+              <h2>Prices</h2>
+            </div>
+            <div class="body widget">
+              <ul class="list-unstyled categories-clouds m-b-0">
+                <h3>Plans Availables</h3>
+                <li><a href="/prices">Starter</a></li>
+                <li><a href="/prices">Popular</a></li>
+                <li><a href="/prices">Advance</a></li>
+              </ul>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
