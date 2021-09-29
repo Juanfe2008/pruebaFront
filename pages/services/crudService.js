@@ -7,7 +7,7 @@ export default class CrudService {
      return await axios.get(this.url)
   }
 
-  save(persona) {
+   save(persona) {
     return  axios.post(this.url, persona)
   }
 

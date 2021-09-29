@@ -84,7 +84,7 @@
         </div>
       </div>
 
-      <div class="form-group row col-sm-12">
+      <!-- <div class="form-group row col-sm-12">
         <label class="col-sm-1">E-Mail</label>
         <input
           class="form-control col-sm-5"
@@ -98,8 +98,8 @@
           placeholder="Password"
           v-model="passwordUser"
         />
-      </div>
-      <div class="col-sm-12 row">
+      </div> -->
+      <!-- <div class="col-sm-12 row">
         <div class="col-sm-6 form-group messaje">
           <div v-if="submited && !$v.email.required">
             *The email field is required
@@ -119,7 +119,7 @@
             *Must have a maximum of 20 characters
           </div>
         </div>
-      </div>
+      </div> -->
 
       <div class="col-sm-12" style="text-align: center;">
         <button type="submit" class="btn btn-post" @click="save">
@@ -163,9 +163,9 @@ export default {
       lastName: "",
       telephone: "",
       address: "",
-      email: "",
+      /* email: "",
       id: "",
-      passwordUser: "",
+      passwordUser: "", */
       user: [],
       personas: null,
       persona: {
@@ -174,8 +174,8 @@ export default {
         apellidos: null,
         telefono: null,
         direccion: null,
-        email: null,
-        password: null,
+       /*  email: null,
+        password: null, */
       },
     };
   },
@@ -191,8 +191,8 @@ export default {
         apellidos: this.lastName,
         telefono: this.telephone,
         direccion: this.address,
-        email: this.email,
-        password: this.passwordUser,
+        /* email: this.email,
+        password: this.passwordUser, */
       };
       console.log(persona);
       this.crudService.save(persona).then((data) => {
@@ -202,8 +202,8 @@ export default {
             (this.lastName = ""),
             (this.telephone = ""),
             (this.address = ""),
-            (this.email = "");
-          this.passwordUser = "";
+            /* (this.email = "");
+          this.passwordUser = ""; */
           this.$router.push("/home");
         }
         console.log(data);
@@ -231,7 +231,7 @@ export default {
       minLength: minLength(5),
       maxLength: maxLength(20),
     },
-    email: {
+    /* email: {
       required,
       email,
     },
@@ -239,7 +239,7 @@ export default {
       required,
       minLength: minLength(8),
       maxLength: maxLength(20),
-    },
+    }, */
   },
   created() {
     this.crudService = new CrudService();
